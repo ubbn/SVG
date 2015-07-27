@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Svg", "Svg.csproj", "{886A98C5-37C0-4E8B-885E-30C1D2F98B47}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SVGViewer", "..\Samples\SVGViewer\SVGViewer.csproj", "{1B8F3C8A-CCAC-474E-B09D-522FBA93DCFD}"
@@ -19,6 +17,26 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SvgW3CTestRunner", "..\Tests\SvgW3CTestRunner\SvgW3CTestRunner.csproj", "{8ED74C39-6CFF-421E-952A-30F9E6957108}"
 EndProject
 Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 5
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\Samples\\SVGViewer\\SVGViewer.csproj
+		SccProjectName1 = ../Samples/SVGViewer
+		SccLocalPath1 = ..\\Samples\\SVGViewer
+		SccProjectUniqueName2 = Svg.csproj
+		SccLocalPath2 = .
+		SccProjectUniqueName3 = ..\\Tests\\Svg.UnitTests\\Svg.UnitTests.csproj
+		SccProjectName3 = ../Tests/Svg.UnitTests
+		SccLocalPath3 = ..\\Tests\\Svg.UnitTests
+		SccProjectUniqueName4 = ..\\Tests\\SvgW3CTestRunner\\SvgW3CTestRunner.csproj
+		SccProjectName4 = ../Tests/SvgW3CTestRunner
+		SccLocalPath4 = ..\\Tests\\SvgW3CTestRunner
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Svg.vsmdi
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -75,8 +93,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(TestCaseManagementSettings) = postSolution
-		CategoryFile = Svg.vsmdi
 	EndGlobalSection
 EndGlobal
