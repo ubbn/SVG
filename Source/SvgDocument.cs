@@ -24,6 +24,12 @@ namespace Svg
         public static readonly int PointsPerInch = 96;
         private SvgElementIdManager _idManager;
 
+        /// <summary>
+        /// To limit size of bitmap, otherwise application will crush as out of memory
+        /// </summary>
+        public const int PNG_LIMIT_X = 2360;
+        public const int PNG_LIMIT_Y = 3360;
+
         private Dictionary<string, IEnumerable<SvgFontFace>> _fontDefns = null;
         internal Dictionary<string, IEnumerable<SvgFontFace>> FontDefns()
         {
@@ -545,6 +551,10 @@ namespace Svg
           {
             size.Width = (int)(rasterHeight / ratio);
           }
+
+          // If any of dimensions are over limit, suppress them by limit value
+          size.Height = size.Height > PNG_LIMIT_X ? PNG_LIMIT_X : size.Height;
+          size.Width = size.Width > PNG_LIMIT_Y ? PNG_LIMIT_Y : size.Width;
         }
 
         public override void Write(XmlTextWriter writer)
