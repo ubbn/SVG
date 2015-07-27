@@ -76,10 +76,10 @@
     <DocumentationFile>bin\Release\Svg.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>false</SignAssembly>
+    <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>svgkey.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>In-process.Comodo.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -352,6 +352,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Basic Shapes\DOM.cd" />
+    <None Include="In-process.Comodo.pfx" />
     <None Include="svgkey.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
