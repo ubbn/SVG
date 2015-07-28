@@ -18,6 +18,7 @@ namespace SVGViewer
         public SVGViewer()
         {
             InitializeComponent();
+            textBox1.Text = @"C:\Users\buyan\Downloads";
         }
 
         private void open_Click(object sender, EventArgs e)
@@ -31,13 +32,21 @@ namespace SVGViewer
         }
 
         private string FXML = "";
+        private string fileName = "";
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-        	using(var s = new MemoryStream(UTF8Encoding.Default.GetBytes(textBox1.Text)))
-        	{
-        		SvgDocument svgDoc = SvgDocument.Open<SvgDocument>(s, null);
-        		RenderSvg(svgDoc);
+          if (textBox1.Text == "")
+            return;
+
+          listBox1.Items.Clear();
+          string[] files = Directory.GetFiles(textBox1.Text);
+          foreach (string file in files)
+          {
+            string fileName = Path.GetFileName(file);
+
+            if (fileName.EndsWith(".svg"))
+              listBox1.Items.Add(fileName);
         	}
         }
         
@@ -45,8 +54,31 @@ namespace SVGViewer
         {
             //var render = new DebugRenderer();
             //svgDoc.Draw(render);
-            svgImage.Image = svgDoc.Draw();
-            svgImage.Image.Save(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(svgDoc.BaseUri.LocalPath), "output.png"));
+          var bitmap = svgDoc.Draw();
+          if (bitmap == null) return;
+
+          svgImage.Image = bitmap;
+          svgImage.Image.Save(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(svgDoc.BaseUri.LocalPath), Path.GetFileNameWithoutExtension(fileName) + ".png"));
+
+            //System.Diagnostics.Process.Start(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(svgDoc.BaseUri.LocalPath), "output.png"));
+            this.Text = "On GITHUB: h" + svgImage.Image.Height + " w" + svgImage.Image.Width;
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+          fileName = listBox1.SelectedItem.ToString();
+          SvgDocument svgDoc = SvgDocument.Open(textBox1.Text + @"\" + fileName);
+
+          RenderSvg(svgDoc);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+          folderBrowserDialog1.SelectedPath = textBox1.Text;
+          var result = folderBrowserDialog1.ShowDialog();
+
+          if (result == DialogResult.OK)
+            textBox1.Text = folderBrowserDialog1.SelectedPath;
         }
     }
 }
