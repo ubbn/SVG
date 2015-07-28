@@ -37,6 +37,9 @@
       this.listBox1 = new System.Windows.Forms.ListBox();
       this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
       this.button1 = new System.Windows.Forms.Button();
+      this.lblPath = new System.Windows.Forms.Label();
+      this.lblDescription = new System.Windows.Forms.Label();
+      this.lblListBox = new System.Windows.Forms.Label();
       this.toolStrip1.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.svgImage)).BeginInit();
       this.SuspendLayout();
@@ -80,7 +83,7 @@
       // textBox1
       // 
       this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-      this.textBox1.Location = new System.Drawing.Point(741, 25);
+      this.textBox1.Location = new System.Drawing.Point(741, 42);
       this.textBox1.MaxLength = 327670;
       this.textBox1.Multiline = true;
       this.textBox1.Name = "textBox1";
@@ -92,16 +95,16 @@
       // 
       this.listBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
       this.listBox1.FormattingEnabled = true;
-      this.listBox1.Location = new System.Drawing.Point(741, 89);
+      this.listBox1.Location = new System.Drawing.Point(741, 128);
       this.listBox1.Name = "listBox1";
-      this.listBox1.Size = new System.Drawing.Size(307, 381);
+      this.listBox1.Size = new System.Drawing.Size(307, 342);
       this.listBox1.TabIndex = 3;
       this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
       // 
       // button1
       // 
       this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-      this.button1.Location = new System.Drawing.Point(951, 48);
+      this.button1.Location = new System.Drawing.Point(951, 65);
       this.button1.Name = "button1";
       this.button1.Size = new System.Drawing.Size(97, 23);
       this.button1.TabIndex = 4;
@@ -109,18 +112,48 @@
       this.button1.UseVisualStyleBackColor = true;
       this.button1.Click += new System.EventHandler(this.button1_Click);
       // 
+      // lblPath
+      // 
+      this.lblPath.AutoSize = true;
+      this.lblPath.Location = new System.Drawing.Point(742, 25);
+      this.lblPath.Name = "lblPath";
+      this.lblPath.Size = new System.Drawing.Size(48, 13);
+      this.lblPath.TabIndex = 5;
+      this.lblPath.Text = "File Path";
+      // 
+      // lblDescription
+      // 
+      this.lblDescription.Location = new System.Drawing.Point(742, 65);
+      this.lblDescription.Name = "lblDescription";
+      this.lblDescription.Size = new System.Drawing.Size(198, 31);
+      this.lblDescription.TabIndex = 6;
+      this.lblDescription.Text = "Enter path or choose from dialog. It will list all SVG files existing the given p" +
+    "ath";
+      // 
+      // lblListBox
+      // 
+      this.lblListBox.AutoSize = true;
+      this.lblListBox.Location = new System.Drawing.Point(745, 109);
+      this.lblListBox.Name = "lblListBox";
+      this.lblListBox.Size = new System.Drawing.Size(271, 13);
+      this.lblListBox.TabIndex = 7;
+      this.lblListBox.Text = "SVG files (press any listed file to render SVG on left side)";
+      // 
       // SVGViewer
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(1060, 474);
+      this.Controls.Add(this.lblListBox);
+      this.Controls.Add(this.lblDescription);
+      this.Controls.Add(this.lblPath);
       this.Controls.Add(this.listBox1);
       this.Controls.Add(this.button1);
       this.Controls.Add(this.textBox1);
       this.Controls.Add(this.svgImage);
       this.Controls.Add(this.toolStrip1);
       this.Name = "SVGViewer";
-      this.Text = "SVG Viewer on Github";
+      this.Text = "SVG to PNG Conversion";
       this.toolStrip1.ResumeLayout(false);
       this.toolStrip1.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.svgImage)).EndInit();
@@ -139,6 +172,9 @@
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label lblPath;
+        private System.Windows.Forms.Label lblDescription;
+        private System.Windows.Forms.Label lblListBox;
     }
 }
 

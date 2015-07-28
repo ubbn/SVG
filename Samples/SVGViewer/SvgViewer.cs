@@ -18,7 +18,7 @@ namespace SVGViewer
         public SVGViewer()
         {
             InitializeComponent();
-            textBox1.Text = @"C:\Users\buyan\Downloads";
+            textBox1.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
         }
 
         private void open_Click(object sender, EventArgs e)
@@ -39,7 +39,14 @@ namespace SVGViewer
           if (textBox1.Text == "")
             return;
 
-          listBox1.Items.Clear();
+          //listBox1.Items.Clear();
+
+          if (!Directory.Exists(textBox1.Text))
+          {
+            MessageBox.Show(textBox1.Text + ": the path does not exist!");
+            return;
+          }
+
           string[] files = Directory.GetFiles(textBox1.Text);
           foreach (string file in files)
           {
@@ -54,18 +61,22 @@ namespace SVGViewer
         {
             //var render = new DebugRenderer();
             //svgDoc.Draw(render);
-          var bitmap = svgDoc.Draw();
+          var bitmap = svgDoc.Draw(0,0);
           if (bitmap == null) return;
 
           svgImage.Image = bitmap;
-          svgImage.Image.Save(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(svgDoc.BaseUri.LocalPath), Path.GetFileNameWithoutExtension(fileName) + ".png"));
+          svgImage.Image.Save(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(svgDoc.BaseUri.LocalPath), 
+            "new." + Path.GetFileNameWithoutExtension(fileName) + ".png"));
 
             //System.Diagnostics.Process.Start(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(svgDoc.BaseUri.LocalPath), "output.png"));
-            this.Text = "On GITHUB: h" + svgImage.Image.Height + " w" + svgImage.Image.Width;
+            this.Text = "Rendered Image, size: h" + svgImage.Image.Height + " w" + svgImage.Image.Width;
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+          if (listBox1.SelectedItem == null)
+            return;
+
           fileName = listBox1.SelectedItem.ToString();
           SvgDocument svgDoc = SvgDocument.Open(textBox1.Text + @"\" + fileName);
 
