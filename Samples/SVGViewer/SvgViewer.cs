@@ -19,6 +19,7 @@ namespace SVGViewer
         {
             InitializeComponent();
             textBox1.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            ListSVGFiles(textBox1.Text);
         }
 
         private void open_Click(object sender, EventArgs e)
@@ -34,21 +35,20 @@ namespace SVGViewer
         private string FXML = "";
         private string fileName = "";
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void ListSVGFiles(string directory)
         {
-          if (textBox1.Text == "")
+          if (string.IsNullOrEmpty(directory))
             return;
 
-          //listBox1.Items.Clear();
+          listBox1.Items.Clear();
 
-          if (!Directory.Exists(textBox1.Text))
+          if (!Directory.Exists(directory))
           {
-            MessageBox.Show(textBox1.Text + ": the path does not exist!");
+            MessageBox.Show(directory + ": the path does not exist!");
             return;
           }
 
-          string[] files = Directory.GetFiles(textBox1.Text);
-          foreach (string file in files)
+          foreach (string file in Directory.GetFiles(directory))
           {
             string fileName = Path.GetFileName(file);
 
@@ -59,8 +59,6 @@ namespace SVGViewer
         
         private void RenderSvg(SvgDocument svgDoc)
         {
-            //var render = new DebugRenderer();
-            //svgDoc.Draw(render);
           var bitmap = svgDoc.Draw(0,0);
           if (bitmap == null) return;
 
@@ -68,7 +66,6 @@ namespace SVGViewer
           svgImage.Image.Save(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(svgDoc.BaseUri.LocalPath), 
             "new." + Path.GetFileNameWithoutExtension(fileName) + ".png"));
 
-            //System.Diagnostics.Process.Start(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(svgDoc.BaseUri.LocalPath), "output.png"));
             this.Text = "Rendered Image, size: h" + svgImage.Image.Height + " w" + svgImage.Image.Width;
         }
 
@@ -89,7 +86,21 @@ namespace SVGViewer
           var result = folderBrowserDialog1.ShowDialog();
 
           if (result == DialogResult.OK)
+          {
             textBox1.Text = folderBrowserDialog1.SelectedPath;
+            ListSVGFiles(textBox1.Text);
+          }
+        }
+
+        private void textBox1_Leave(object sender, EventArgs e)
+        {
+          ListSVGFiles(textBox1.Text);
+        }
+
+        private void textBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+          if (e.KeyCode == Keys.Enter)
+            ListSVGFiles(textBox1.Text);
         }
     }
 }

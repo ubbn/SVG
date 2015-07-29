@@ -85,11 +85,11 @@
       this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
       this.textBox1.Location = new System.Drawing.Point(741, 42);
       this.textBox1.MaxLength = 327670;
-      this.textBox1.Multiline = true;
       this.textBox1.Name = "textBox1";
-      this.textBox1.Size = new System.Drawing.Size(307, 17);
+      this.textBox1.Size = new System.Drawing.Size(307, 20);
       this.textBox1.TabIndex = 2;
-      this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+      this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
+      this.textBox1.Leave += new System.EventHandler(this.textBox1_Leave);
       // 
       // listBox1
       // 
@@ -114,6 +114,7 @@
       // 
       // lblPath
       // 
+      this.lblPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
       this.lblPath.AutoSize = true;
       this.lblPath.Location = new System.Drawing.Point(742, 25);
       this.lblPath.Name = "lblPath";
@@ -123,6 +124,7 @@
       // 
       // lblDescription
       // 
+      this.lblDescription.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
       this.lblDescription.Location = new System.Drawing.Point(742, 65);
       this.lblDescription.Name = "lblDescription";
       this.lblDescription.Size = new System.Drawing.Size(198, 31);
@@ -132,6 +134,7 @@
       // 
       // lblListBox
       // 
+      this.lblListBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
       this.lblListBox.AutoSize = true;
       this.lblListBox.Location = new System.Drawing.Point(745, 109);
       this.lblListBox.Name = "lblListBox";
