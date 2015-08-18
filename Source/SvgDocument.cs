@@ -27,8 +27,8 @@ namespace Svg
         /// <summary>
         /// To limit size of bitmap, otherwise application will crush as out of memory
         /// </summary>
-        public const int PNG_LIMIT_X = 2360;
-        public const int PNG_LIMIT_Y = 3360;
+        public const int PNG_LIMIT_X = 10000;
+        public const int PNG_LIMIT_Y = 10000;
 
         private Dictionary<string, IEnumerable<SvgFontFace>> _fontDefns = null;
         internal Dictionary<string, IEnumerable<SvgFontFace>> FontDefns()
