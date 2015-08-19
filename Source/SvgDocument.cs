@@ -25,10 +25,9 @@ namespace Svg
         private SvgElementIdManager _idManager;
 
         /// <summary>
-        /// To limit size of bitmap, otherwise application will crush as out of memory
+        /// To limit size(pixel) of bitmap, otherwise application will crush as out of memory
         /// </summary>
-        public const int PNG_LIMIT_X = 5000;
-        public const int PNG_LIMIT_Y = 5000;
+        public const int PNG_PXL_LIMIT = 5000;
 
         private Dictionary<string, IEnumerable<SvgFontFace>> _fontDefns = null;
         internal Dictionary<string, IEnumerable<SvgFontFace>> FontDefns()
@@ -552,9 +551,17 @@ namespace Svg
             size.Width = (int)(rasterHeight / ratio);
           }
 
-          // If any of dimensions are over limit, suppress them by limit value
-          size.Height = size.Height > PNG_LIMIT_X ? PNG_LIMIT_X : size.Height;
-          size.Width = size.Width > PNG_LIMIT_Y ? PNG_LIMIT_Y : size.Width;
+          // If any of dimensions is over limit, suppress them to MAX value
+          if (size.Height > PNG_PXL_LIMIT)
+          {
+            size.Height = PNG_PXL_LIMIT;
+            size.Width = (int)(size.Height / ratio);
+          }
+          if (size.Width > PNG_PXL_LIMIT)
+          {
+            size.Width = PNG_PXL_LIMIT;
+            size.Height = (int)(size.Width * ratio);
+          }
         }
 
         public override void Write(XmlTextWriter writer)
