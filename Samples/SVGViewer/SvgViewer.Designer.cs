@@ -40,8 +40,14 @@
       this.lblPath = new System.Windows.Forms.Label();
       this.lblDescription = new System.Windows.Forms.Label();
       this.lblListBox = new System.Windows.Forms.Label();
+      this.groupBox1 = new System.Windows.Forms.GroupBox();
+      this.tbWidth = new System.Windows.Forms.TextBox();
+      this.lblWidth = new System.Windows.Forms.Label();
+      this.lblHeight = new System.Windows.Forms.Label();
+      this.tbHeight = new System.Windows.Forms.TextBox();
       this.toolStrip1.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.svgImage)).BeginInit();
+      this.groupBox1.SuspendLayout();
       this.SuspendLayout();
       // 
       // toolStrip1
@@ -87,17 +93,18 @@
       this.textBox1.MaxLength = 327670;
       this.textBox1.Name = "textBox1";
       this.textBox1.Size = new System.Drawing.Size(307, 20);
-      this.textBox1.TabIndex = 2;
+      this.textBox1.TabIndex = 1;
       this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
       this.textBox1.Leave += new System.EventHandler(this.textBox1_Leave);
       // 
       // listBox1
       // 
-      this.listBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+      this.listBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
       this.listBox1.FormattingEnabled = true;
       this.listBox1.Location = new System.Drawing.Point(741, 128);
       this.listBox1.Name = "listBox1";
-      this.listBox1.Size = new System.Drawing.Size(307, 342);
+      this.listBox1.Size = new System.Drawing.Size(307, 264);
       this.listBox1.TabIndex = 3;
       this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
       // 
@@ -107,7 +114,7 @@
       this.button1.Location = new System.Drawing.Point(951, 65);
       this.button1.Name = "button1";
       this.button1.Size = new System.Drawing.Size(97, 23);
-      this.button1.TabIndex = 4;
+      this.button1.TabIndex = 2;
       this.button1.Text = "Open Folder";
       this.button1.UseVisualStyleBackColor = true;
       this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -142,11 +149,58 @@
       this.lblListBox.TabIndex = 7;
       this.lblListBox.Text = "SVG files (press any listed file to render SVG on left side)";
       // 
+      // groupBox1
+      // 
+      this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+      this.groupBox1.Controls.Add(this.tbWidth);
+      this.groupBox1.Controls.Add(this.tbHeight);
+      this.groupBox1.Controls.Add(this.lblWidth);
+      this.groupBox1.Controls.Add(this.lblHeight);
+      this.groupBox1.Location = new System.Drawing.Point(741, 398);
+      this.groupBox1.Name = "groupBox1";
+      this.groupBox1.Size = new System.Drawing.Size(307, 70);
+      this.groupBox1.TabIndex = 12;
+      this.groupBox1.TabStop = false;
+      this.groupBox1.Text = "Override original size";
+      // 
+      // tbWidth
+      // 
+      this.tbWidth.Location = new System.Drawing.Point(64, 45);
+      this.tbWidth.Name = "tbWidth";
+      this.tbWidth.Size = new System.Drawing.Size(100, 20);
+      this.tbWidth.TabIndex = 5;
+      // 
+      // lblWidth
+      // 
+      this.lblWidth.AutoSize = true;
+      this.lblWidth.Location = new System.Drawing.Point(22, 45);
+      this.lblWidth.Name = "lblWidth";
+      this.lblWidth.Size = new System.Drawing.Size(35, 13);
+      this.lblWidth.TabIndex = 13;
+      this.lblWidth.Text = "Width";
+      // 
+      // lblHeight
+      // 
+      this.lblHeight.AutoSize = true;
+      this.lblHeight.Location = new System.Drawing.Point(21, 22);
+      this.lblHeight.Name = "lblHeight";
+      this.lblHeight.Size = new System.Drawing.Size(38, 13);
+      this.lblHeight.TabIndex = 12;
+      this.lblHeight.Text = "Height";
+      // 
+      // tbHeight
+      // 
+      this.tbHeight.Location = new System.Drawing.Point(64, 19);
+      this.tbHeight.Name = "tbHeight";
+      this.tbHeight.Size = new System.Drawing.Size(100, 20);
+      this.tbHeight.TabIndex = 4;
+      // 
       // SVGViewer
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(1060, 474);
+      this.Controls.Add(this.groupBox1);
       this.Controls.Add(this.lblListBox);
       this.Controls.Add(this.lblDescription);
       this.Controls.Add(this.lblPath);
@@ -160,6 +214,8 @@
       this.toolStrip1.ResumeLayout(false);
       this.toolStrip1.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.svgImage)).EndInit();
+      this.groupBox1.ResumeLayout(false);
+      this.groupBox1.PerformLayout();
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -178,6 +234,11 @@
         private System.Windows.Forms.Label lblPath;
         private System.Windows.Forms.Label lblDescription;
         private System.Windows.Forms.Label lblListBox;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.TextBox tbWidth;
+        private System.Windows.Forms.TextBox tbHeight;
+        private System.Windows.Forms.Label lblWidth;
+        private System.Windows.Forms.Label lblHeight;
     }
 }
 

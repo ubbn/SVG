@@ -59,12 +59,18 @@ namespace SVGViewer
         
         private void RenderSvg(SvgDocument svgDoc)
         {
-          var bitmap = svgDoc.Draw(0,0);
+          int width, height;
+          if (!Int32.TryParse(tbHeight.Text, out height))
+            tbHeight.Text = (height = 0).ToString();
+          if (!Int32.TryParse(tbWidth.Text, out width))
+            tbWidth.Text = (width = 0).ToString();
+
+          var bitmap = svgDoc.Draw(width, height);
           if (bitmap == null) return;
 
           svgImage.Image = bitmap;
           svgImage.Image.Save(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(svgDoc.BaseUri.LocalPath), 
-            "new." + Path.GetFileNameWithoutExtension(fileName) + ".png"));
+            string.Format("{0}_{1}.{2}", Path.GetFileNameWithoutExtension(fileName), DateTime.Now.ToString("yyyyMMdd_hhmmss"), "png")));
 
             this.Text = "Rendered Image, size: h" + svgImage.Image.Height + " w" + svgImage.Image.Width;
         }
