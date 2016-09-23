@@ -13,6 +13,7 @@ using ExCSS;
 using Svg.Css;
 using System.Threading;
 using System.Globalization;
+using Svg.Exceptions;
 
 namespace Svg
 {
@@ -243,7 +244,8 @@ namespace Svg
             SvgElement element = null;
             SvgElement parent;
             T svgDocument = null;
-            
+			var elementFactory = new SvgElementFactory();
+
             var styles = new List<ISvgNode>();
 
             while (reader.Read())
@@ -259,11 +261,11 @@ namespace Svg
                             // Create element
                             if (elementStack.Count > 0)
                             {
-                                element = SvgElementFactory.CreateElement(reader, svgDocument);
+                                element = elementFactory.CreateElement(reader, svgDocument);
                             }
                             else
                             {
-                                svgDocument = SvgElementFactory.CreateDocument<T>(reader);
+                                svgDocument = elementFactory.CreateDocument<T>(reader);
                                 element = svgDocument;
                             }
 
@@ -349,7 +351,7 @@ namespace Svg
 
                     foreach (var selector in selectors)
                     {
-                        elemsToStyle = svgDocument.QuerySelectorAll(rule.Selector.ToString());
+                        elemsToStyle = svgDocument.QuerySelectorAll(rule.Selector.ToString(), elementFactory);
                         foreach (var elem in elemsToStyle)
                         {
                             foreach (var decl in rule.Declarations)
@@ -433,17 +435,27 @@ namespace Svg
             this.Render(renderer);
         }
 
-        /// <summary>
-        /// Renders the <see cref="SvgDocument"/> and returns the image as a <see cref="Bitmap"/>.
-        /// </summary>
-        /// <returns>A <see cref="Bitmap"/> containing the rendered document.</returns>
-        public virtual Bitmap Draw()
-        {
-            //Trace.TraceInformation("Begin Render");
+	    /// <summary>
+	    /// Renders the <see cref="SvgDocument"/> and returns the image as a <see cref="Bitmap"/>.
+	    /// </summary>
+	    /// <returns>A <see cref="Bitmap"/> containing the rendered document.</returns>
+	    public virtual Bitmap Draw()
+	    {
+		    //Trace.TraceInformation("Begin Render");
 
-            var size = GetDimensions();
-            var bitmap = new Bitmap((int)Math.Round(size.Width), (int)Math.Round(size.Height));
-            // 	bitmap.SetResolution(300, 300);
+		    var size = GetDimensions();
+		    Bitmap bitmap = null;
+		    try
+		    {
+			    bitmap = new Bitmap((int) Math.Round(size.Width), (int) Math.Round(size.Height));
+		    }
+		    catch (ArgumentException e)
+		    {
+				//When processing too many files at one the system can run out of memory
+			    throw new SvgMemoryException("Cannot process SVG file, cannot allocate the required memory", e);
+		    }
+
+	    // 	bitmap.SetResolution(300, 300);
             try
             {
                 Draw(bitmap);
@@ -473,10 +485,10 @@ namespace Svg
 
 					//EO, 2014-12-05: Requested to ensure proper zooming (draw the svg in the bitmap size, ==> proper scaling)
 					//EO, 2015-01-09, Added GetDimensions to use its returned size instead of this.Width and this.Height (request of Icarrere).
-
-          //BBN, 2015-07-29, it is unnecassary to call again GetDimensions and transform to 1x1
-          //SizeF size = this.GetDimensions();
-					//renderer.ScaleTransform(bitmap.Width / size.Width, bitmap.Height / size.Height);
+                    //BBN, 2015-07-29, it is unnecassary to call again GetDimensions and transform to 1x1
+                    //JA, 2015-12-18, this is actually necessary to correctly render the Draw(rasterHeight, rasterWidth) overload, otherwise the rendered graphic doesn't scale correctly
+                    SizeF size = this.GetDimensions();
+					renderer.ScaleTransform(bitmap.Width / size.Width, bitmap.Height / size.Height);
 
 					//EO, 2014-12-05: Requested to ensure proper zooming out (reduce size). Otherwise it clip the image.
 					this.Overflow = SvgOverflow.Auto;
@@ -551,12 +563,16 @@ namespace Svg
         {
             //Save previous culture and switch to invariant for writing
             var previousCulture = Thread.CurrentThread.CurrentCulture;
-            Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
-
-            base.Write(writer);
-
-            //Switch culture back
-            Thread.CurrentThread.CurrentCulture = previousCulture;
+            try {
+                Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
+                base.Write(writer);
+            }
+            finally
+            {
+                // Make sure to set back the old culture even an error occurred.
+                //Switch culture back
+                Thread.CurrentThread.CurrentCulture = previousCulture;
+            }
         }
 
         public void Write(Stream stream)

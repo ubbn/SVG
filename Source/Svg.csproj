@@ -76,7 +76,7 @@
     <DocumentationFile>bin\Release\Svg.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>false</SignAssembly>
+    <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>svgkey.snk</AssemblyOriginatorKeyFile>
@@ -107,12 +107,15 @@
     <Compile Include="DataTypes\SvgTextPathSpacing.cs" />
     <Compile Include="DataTypes\XmlSpaceHandling.cs" />
     <Compile Include="Document Structure\SvgSymbol.cs" />
+    <Compile Include="Exceptions\SvgMemoryException.cs" />
+    <Compile Include="ExtensionMethods\UriExtensions.cs" />
     <Compile Include="Filter Effects\ImageBuffer.cs" />
     <Compile Include="Painting\GenericBoundable.cs" />
     <Compile Include="Painting\SvgFallbackPaintServer .cs" />
     <Compile Include="Paths\CoordinateParser.cs" />
     <Compile Include="Rendering\IGraphicsProvider.cs" />
     <Compile Include="Rendering\ISvgRenderer.cs" />
+    <Compile Include="Rendering\SvgRendering.cs" />
     <Compile Include="SvgElementStyle.cs" />
     <Compile Include="SvgNodeReader.cs" />
     <Compile Include="Css\CssQuery.cs" />
@@ -352,6 +355,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Basic Shapes\DOM.cd" />
+    <None Include="Svg.nuspec" />
     <None Include="svgkey.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

@@ -4,6 +4,7 @@ using System.Text;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Diagnostics;
+using Svg.ExtensionMethods;
 
 namespace Svg
 {
@@ -17,9 +18,9 @@ namespace Svg
         /// Gets or sets the marker (end cap) of the path.
         /// </summary>
         [SvgAttribute("marker-end")]
-        public Uri MarkerEnd
+        public override Uri MarkerEnd
         {
-            get { return this.Attributes.GetAttribute<Uri>("marker-end"); }
+            get { return this.Attributes.GetAttribute<Uri>("marker-end").ReplaceWithNullIfNone(); }
             set { this.Attributes["marker-end"] = value; }
         }
 
@@ -28,9 +29,9 @@ namespace Svg
         /// Gets or sets the marker (start cap) of the path.
         /// </summary>
         [SvgAttribute("marker-mid")]
-        public Uri MarkerMid
+        public override Uri MarkerMid
         {
-            get { return this.Attributes.GetAttribute<Uri>("marker-mid"); }
+            get { return this.Attributes.GetAttribute<Uri>("marker-mid").ReplaceWithNullIfNone(); }
             set { this.Attributes["marker-mid"] = value; }
         }
 
@@ -39,9 +40,9 @@ namespace Svg
         /// Gets or sets the marker (start cap) of the path.
         /// </summary>
         [SvgAttribute("marker-start")]
-        public Uri MarkerStart
+        public override Uri MarkerStart
         {
-            get { return this.Attributes.GetAttribute<Uri>("marker-start"); }
+            get { return this.Attributes.GetAttribute<Uri>("marker-start").ReplaceWithNullIfNone(); }
             set { this.Attributes["marker-start"] = value; }
         }
 

@@ -1,4 +1,6 @@
-﻿namespace SvgW3CTestRunner
+﻿using System.Drawing;
+
+namespace SvgW3CTestRunner
 {
     partial class View
     {
@@ -29,6 +31,7 @@
         private void InitializeComponent()
         {
             this.lstFiles = new System.Windows.Forms.ListBox();
+            this.boxConsoleLog = new System.Windows.Forms.RichTextBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -41,6 +44,9 @@
             this.picPng = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fIleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.runAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -51,6 +57,7 @@
             this.tableLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picSVGPNG)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPng)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lstFiles
@@ -59,9 +66,21 @@
             this.lstFiles.FormattingEnabled = true;
             this.lstFiles.Location = new System.Drawing.Point(3, 3);
             this.lstFiles.Name = "lstFiles";
-            this.lstFiles.Size = new System.Drawing.Size(174, 768);
+            this.lstFiles.Size = new System.Drawing.Size(174, 777);
             this.lstFiles.TabIndex = 0;
             this.lstFiles.SelectedIndexChanged += new System.EventHandler(this.lstFiles_SelectedIndexChanged);
+            // 
+            // boxConsoleLog
+            // 
+            this.boxConsoleLog.BackColor = System.Drawing.Color.White;
+            this.boxConsoleLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.boxConsoleLog.Location = new System.Drawing.Point(183, 786);
+            this.boxConsoleLog.Name = "boxConsoleLog";
+            this.boxConsoleLog.ReadOnly = true;
+            this.boxConsoleLog.Size = new System.Drawing.Size(1093, 64);
+            this.boxConsoleLog.TabIndex = 0;
+            this.boxConsoleLog.Text = "";
+            this.boxConsoleLog.MouseDown += new System.Windows.Forms.MouseEventHandler(this.boxConsoleLog_MouseDown);
             // 
             // tableLayoutPanel1
             // 
@@ -70,12 +89,14 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.splitContainer1, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.lstFiles, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.boxConsoleLog, 1, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 24);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1249, 774);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 70F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1279, 853);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // splitContainer1
@@ -91,8 +112,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tableLayoutPanel3);
-            this.splitContainer1.Size = new System.Drawing.Size(1063, 768);
-            this.splitContainer1.SplitterDistance = 548;
+            this.splitContainer1.Size = new System.Drawing.Size(1093, 777);
+            this.splitContainer1.SplitterDistance = 563;
             this.splitContainer1.TabIndex = 0;
             // 
             // tableLayoutPanel2
@@ -111,17 +132,17 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(548, 768);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(563, 777);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // picSaveLoad
             // 
             this.picSaveLoad.BackColor = System.Drawing.Color.White;
             this.picSaveLoad.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.picSaveLoad.Location = new System.Drawing.Point(0, 397);
+            this.picSaveLoad.Location = new System.Drawing.Point(0, 401);
             this.picSaveLoad.Margin = new System.Windows.Forms.Padding(0);
             this.picSaveLoad.Name = "picSaveLoad";
-            this.picSaveLoad.Size = new System.Drawing.Size(548, 371);
+            this.picSaveLoad.Size = new System.Drawing.Size(563, 376);
             this.picSaveLoad.TabIndex = 2;
             this.picSaveLoad.TabStop = false;
             // 
@@ -141,14 +162,14 @@
             this.picSvg.Location = new System.Drawing.Point(0, 13);
             this.picSvg.Margin = new System.Windows.Forms.Padding(0);
             this.picSvg.Name = "picSvg";
-            this.picSvg.Size = new System.Drawing.Size(548, 371);
+            this.picSvg.Size = new System.Drawing.Size(563, 375);
             this.picSvg.TabIndex = 1;
             this.picSvg.TabStop = false;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 384);
+            this.label3.Location = new System.Drawing.Point(3, 388);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(80, 13);
             this.label3.TabIndex = 3;
@@ -170,17 +191,17 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(511, 768);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(526, 777);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
             // picSVGPNG
             // 
             this.picSVGPNG.BackColor = System.Drawing.Color.White;
             this.picSVGPNG.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.picSVGPNG.Location = new System.Drawing.Point(0, 397);
+            this.picSVGPNG.Location = new System.Drawing.Point(0, 401);
             this.picSVGPNG.Margin = new System.Windows.Forms.Padding(0);
             this.picSVGPNG.Name = "picSVGPNG";
-            this.picSVGPNG.Size = new System.Drawing.Size(511, 371);
+            this.picSVGPNG.Size = new System.Drawing.Size(526, 376);
             this.picSVGPNG.TabIndex = 3;
             this.picSVGPNG.TabStop = false;
             // 
@@ -191,7 +212,7 @@
             this.picPng.Location = new System.Drawing.Point(0, 13);
             this.picPng.Margin = new System.Windows.Forms.Padding(0);
             this.picPng.Name = "picPng";
-            this.picPng.Size = new System.Drawing.Size(511, 371);
+            this.picPng.Size = new System.Drawing.Size(526, 375);
             this.picPng.TabIndex = 2;
             this.picPng.TabStop = false;
             // 
@@ -200,25 +221,52 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(3, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(68, 13);
+            this.label2.Size = new System.Drawing.Size(83, 13);
             this.label2.TabIndex = 0;
-            this.label2.Text = "PNG Render";
+            this.label2.Text = "Reference PNG";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 384);
+            this.label4.Location = new System.Drawing.Point(3, 388);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(69, 13);
             this.label4.TabIndex = 4;
             this.label4.Text = "SVG vs PNG";
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fIleToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1279, 24);
+            this.menuStrip1.TabIndex = 2;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fIleToolStripMenuItem
+            // 
+            this.fIleToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.runAllToolStripMenuItem});
+            this.fIleToolStripMenuItem.Name = "fIleToolStripMenuItem";
+            this.fIleToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fIleToolStripMenuItem.Text = "File";
+            // 
+            // runAllToolStripMenuItem
+            // 
+            this.runAllToolStripMenuItem.Name = "runAllToolStripMenuItem";
+            this.runAllToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.runAllToolStripMenuItem.Text = "Run All";
+            this.runAllToolStripMenuItem.Click += new System.EventHandler(this.RunAllToolStripMenuItemClick);
+            // 
             // View
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1249, 774);
+            this.ClientSize = new System.Drawing.Size(1279, 877);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "View";
             this.Text = "Form1";
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -233,13 +281,17 @@
             this.tableLayoutPanel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picSVGPNG)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPng)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
         
 
         #endregion
 
+		private System.Windows.Forms.RichTextBox boxConsoleLog;
         private System.Windows.Forms.ListBox lstFiles;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.SplitContainer splitContainer1;
@@ -253,6 +305,9 @@
         private System.Windows.Forms.PictureBox picSVGPNG;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem fIleToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem runAllToolStripMenuItem;
     }
 }
 
